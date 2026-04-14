@@ -18,8 +18,4 @@ This is a full-stack web application developed using Django that allows users to
 - **Database:** SQLite
 - **Tools:** Git, GitHub
 
-## ⚙️ Installation & Setup
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/bookstore-django.git
