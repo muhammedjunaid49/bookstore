@@ -1,0 +1,176 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment Page</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f3f6;
+    margin: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    display: flex;
+    gap: 20px;
+}
+
+.left, .right {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.left {
+    flex: 2;
+}
+
+.right {
+    flex: 1;
+    background: #f5f7fa;
+}
+
+.section {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.section h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    transform: scale(1.2);
+}
+
+.upi-box {
+    margin-top: 10px;
+    display: none;
+}
+
+.upi-box input {
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.price-box {
+    background: #eef3fb;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.total {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2874f0;
+}
+
+.btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #fb641b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #e5530d;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="left">
+        <h2>Complete Payment</h2>
+
+        <div class="section">
+            <label class="option">
+                <input type="radio" name="payment_method" value="UPI" onclick="showUPI(true)" required>
+                <h3>UPI Payment</h3>
+            </label>
+
+            <div class="upi-box" id="upiBox" style="display:none;">
+                <input type="text" name="upi_id" placeholder="Enter UPI ID (example@upi)">
+            </div>
+        </div>
+
+        <div class="section">
+            <label class="option">
+                <input type="radio" name="payment_method" value="COD" onclick="showUPI(false)">
+                <h3>Cash on Delivery</h3>
+            </label>
+        </div>
+
+    </div>
+
+    <div class="right">
+        <div class="price-box">
+            <div class="price-row">
+                <span>MRP</span>
+                <span>₹{{ book.price }}</span>
+            </div>
+
+            <div class="price-row">
+                <span>Fees</span>
+                <span>₹0</span>
+            </div>
+
+            <div class="price-row">
+                <span>Discount</span>
+                <span style="color: green;">₹0</span>
+            </div>
+
+            <hr>
+
+            <div class="price-row total">
+                <span>Total</span>
+                <span>₹{{ book.price }}</span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Place Order</button>
+    </div>
+
+</form>
+
+</div>
+
+<script>
+function showUPI(show) {
+    document.getElementById("upiBox").style.display = show ? "block" : "none";
+}
+</script>
+</body>
+</html>
+
+{% endblock %}

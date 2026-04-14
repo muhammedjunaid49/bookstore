@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .product-page {
+  display: flex;
+  gap: 40px;
+  padding: 30px;
+  background: #f5f5f5;
+}
+
+.product-image img {
+  width: 250px;
+  border-radius: 8px;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.product-details h1 {
+  color: #c62828;
+  font-size: 28px;
+}
+
+.product-details .type {
+  color: #555;
+  font-size: 16px;
+}
+
+.meta {
+  color: #555;
+  margin: 5px 0;
+}
+
+.rating {
+  margin: 10px 0;
+  color: orange;
+}
+
+.price {
+  color: #c62828;
+  margin: 10px 0;
+}
+
+.stock {
+  color: green;
+  font-weight: bold;
+}
+
+.delivery {
+  margin-bottom: 10px;
+}
+
+.description {
+  color: #333;
+  line-height: 1.6;
+}
+
+.buy-box {
+  width: 250px;
+  background: #eee;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.buy-box select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
+.cart-btn {
+  width: 100%;
+  padding: 10px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.buy-btn {
+  width: 100%;
+  padding: 10px;
+  background: #ef6c00;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.wish-btn {
+  width: 100%;
+  padding: 10px;
+  background: #ddd;
+  border: none;
+  border-radius: 20px;
+}
+</style>
+
+
+<div class="product-page">
+
+  <div class="product-image">
+    <img src="{{ book.image.url }}" alt="{{ book.title }}">
+  </div>
+
+  <div class="product-details">
+    <h1>{{ book.title }} <span class="type">(Paperback)</span></h1>
+
+    <p class="meta">Released: {{ book.release_date }}</p>
+    <p class="meta">By: {{ book.author }}</p>
+
+    <div class="rating">
+      ⭐⭐⭐⭐⭐ <span>7 Reviews</span>
+    </div>
+  
+    <h2 class="price">₹{{ book.price }}</h2>
+
+
+    <p class="stock">Available</p>
+    <p class="delivery">Ships within <b>4-6 Business Days</b></p>
+
+    <hr>
+
+    <p class="description">
+      {{ book.description }}
+    </p>
+  </div>
+
+<div class="buy-box">
+
+  <form action="{% url 'add_to_cart' book.id %}" method="post">
+    {% csrf_token %}
+
+    <label>Quantity:</label>
+    <select name="qty">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+
+    <button type="submit" class="cart-btn">
+      Add to Cart
+    </button>
+
+  </form>
+<form action="{% url 'buy_now' book.id %}" method="POST">
+    {% csrf_token %}
+    <button class="buy-btn">Buy Now</button>
+</form>
+</div>
+{% endblock %}

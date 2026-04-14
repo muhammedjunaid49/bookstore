@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#979797;
+}
+
+form{
+background:#fff;
+padding:40px;
+width:350px;
+border-radius:10px;
+box-shadow:0 15px 30px rgba(0,0,0,0.2);
+}
+
+h2{
+text-align:center;
+margin-bottom:25px;
+color:#333;
+}
+
+.input-group{
+margin-bottom:20px;
+display:flex;
+flex-direction:column;
+}
+
+.input-group label{
+font-size:14px;
+margin-bottom:5px;
+}
+
+.input-group input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:5px;
+font-size:14px;
+}
+
+.input-group input:focus{
+outline:none;
+border-color:#667eea;
+}
+
+.login-btn{
+width:100%;
+padding:12px;
+border:none;
+background:#667eea;
+color:#fff;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.login-btn:hover{
+background:#4c5bd4;
+}
+
+.extra-links{
+text-align:center;
+margin-top:15px;
+font-size:14px;
+}
+
+.extra-links a{
+color:#667eea;
+text-decoration:none;
+font-weight:bold;
+}
+
+.extra-links a:hover{
+text-decoration:underline;
+}
+</style>
+</head>
+<body>
+
+  <form method="POST">
+  {% csrf_token %}
+
+  <div class="input-group">
+    <label>Name</label>
+    <input type="text" name="username" placeholder="Enter your name" required>
+  </div>
+
+  <div class="input-group">
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter your password" required>
+  </div>
+
+  <button type="submit" class="login-btn">Login</button>
+  <div class="extra-links">
+  <p><a href="#">Forgot password?</a></p>
+  <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .cart-container {
+  width: 80%;
+  margin: auto;
+  background: #f5f5f5;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.cart-img {
+  width: 80px;
+  border-radius: 8px;
+}
+
+.cart-details {
+  flex: 1;
+}
+
+select {
+  padding: 5px;
+  border-radius: 6px;
+}
+
+.subtotal {
+  font-weight: bold;
+}
+
+.cart-summary {
+  text-align: right;
+}
+
+.free {
+  color: blue;
+}
+
+.checkout-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+</style>
+<div class="cart-container">
+
+  <h1>Cart</h1>
+
+  {% for item in items %}
+  <div class="cart-item">
+        <img src="{{ item.book.image.url }}" class="cart-img">
+    <div class="cart-details">
+      <h3>{{ item.book.title }}</h3>
+      <p>₹{{ item.book.price }}</p>
+    </div>
+        <form action="{% url 'update_cart' item.book.id %}" method="post">
+      {% csrf_token %}
+      <select name="qty" onchange="this.form.submit()">
+        {% for i in "12345" %}
+        <option value="{{ i }}" {% if item.qty == i|add:0 %}selected{% endif %}>
+          {{ i }}
+        </option>
+        {% endfor %}
+      </select>
+      
+    </form>
+    <div class="subtotal">
+      ₹{{ item.subtotal }}
+    </div>
+<a href="{% url 'remove_from_cart' item.book.id %}" class="remove-btn">
+        ❌
+    </a>
+  </div>
+  {% endfor %}
+
+  <hr>
+  <div class="cart-summary">
+    <p>Subtotal: ₹{{ total }}</p>
+    <p>Shipping: <span class="free">Free</span></p>
+
+    <h2>Total: ₹{{ total }}</h2>
+
+<button class="checkout-btn"onclick="window.location.href='{% url 'payment' %}'">
+    Checkout
+</button>  </div>
+
+</div>
+{% endblock %}

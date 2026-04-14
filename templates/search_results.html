@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<h2>Showing results for "{{ query }}"</h2>
+
+<div class="book-container">
+{% for book in results %}
+    <div class="book-card">
+        <img src="{{ book.image.url }}" alt="">
+        <h4>{{ book.title }}</h4>
+        <p class="author">{{ book.author }}</p>
+
+        <div class="price">
+            <span class="old">₹ {{ book.old_price }}</span>
+            <span class="off">₹ {{ book.discount }} Off</span>
+            <span class="new">₹ {{ book.price }}</span>
+        </div>
+
+        <button class="cart-btn">Add to Bag</button>
+    </div>
+{% empty %}
+    <p>No books found</p>
+{% endfor %}
+</div>
+
+{% endblock %}

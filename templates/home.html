@@ -1,0 +1,268 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <section class="banner">
+        <div class="banner-left">
+            <h2 class="tag">READING FEST</h2>
+            <h1>UP TO <span>25%</span></h1>
+            <h3><span class="highlight">OFF</span> SITEWIDE</h3>
+        </div>
+        <div class="banner-right">
+            <img src="{% static 'img/cover.png' %}" alt="Books">
+        </div>
+    </section>
+	
+
+	<section class="trending">
+    <div class="trending-header">
+        <div>
+            <h2>Trending Now</h2>
+            <p>Books Everyone’s Talking About!</p>
+        </div>
+<a href="{% url 'all_trendingbooks' %}" class="show-all">Show All</a>    </div>
+
+
+    <div class="book-container" id="booksContainer">
+{% for book in trending_books %}
+        <div class="book-card" data-url="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url }}" alt="">
+            <h4>{{ book.title }}</h4>
+            <p class="author">{{ book.author }}</p>
+            <div class="price">
+                <span class="old">₹ {{ book.old_price }}</span>
+                <span class="off">₹ {{ book.discount }} Offf</span>
+                <span class="new">₹ {{ book.price }}</span>
+            </div>
+            <button class="cart-btn">Add to Cart</button>
+        </div>
+{% endfor %}
+</div>
+</section>
+
+<section class="trending">
+    <div class="trending-header">
+        <div>
+            <h2>Offer Books</h2>
+        </div>
+<a href="{% url 'all_offerbooks' %}" class="show-all">Show All</a>   </div>
+  
+    <div class="book-container" id="booksContainer">
+{% for book in offer_books %}
+
+
+         <div class="book-card" data-url="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url }}"alt="">
+            <h4>{{ book.title }}</h4>
+            <p class="author">{{ book.author }}</p>
+            <div class="price">
+                <span class="old">₹ {{ book.old_price }}</span>
+                <span class="off">₹ {{ book.discount }} Offf</span>
+                <span class="new">₹ {{ book.price }}</span>
+            </div>
+
+            <button class="cart-btn">Add to Cart</button>
+        </div>
+                {% endfor %}
+
+            
+    </div>
+</section>
+
+<section class="trending">
+    <div class="trending-header">
+        <div>
+            <h2>New Arrival</h2>
+            <p>Books Everyone’s Talking About!</p>
+        </div>
+<a href="{% url 'all_newbooks' %}" class="show-all">Show All</a>     </div>
+
+    <div class="book-container" id="booksContainer" >
+        {% for book in new_arrival %}
+        <div class="book-card" data-url="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url }}" alt="">
+            <h4>{{ book.title }}</h4>
+            <p class="author">{{ book.author }}</p>
+        <div class="price">
+                <span class="old">₹ {{ book.old_price }}</span>
+                <span class="off">₹ {{ book.discount }} Off</span>
+                <span class="new">₹ {{ book.price }}</span>
+            </div>
+
+            <button class="cart-btn">Add to Cart</button>
+        </div>
+        {% endfor %}
+
+            </div>
+    
+</section>
+
+<section class="trending">
+  <div class="trending-header">
+    <div>
+      <h1>Best Sellers</h1>
+      <p>Read What Millions Have Loved!</p>
+    </div>
+<a href="{% url 'all_best' %}" class="show-all">Show All</a>    </div>
+  </div>
+
+ <div class="book-container">
+{% for book in best_seller %}
+        <div class="book-card" data-url="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url }}" alt="">
+            <h4>{{ book.title }}</h4>
+            <p class="author">{{ book.author }}</p>
+            <div class="price">
+                <span class="old">₹ {{ book.old_price }}</span>
+                <span class="off">₹ {{ book.discount }} Offf</span>
+                <span class="new">₹ {{ book.price }}</span>
+                
+            </div>
+            <button class="cart-btn">Add to Cart</button>
+        </div>
+{% endfor %}
+</div>
+</section>
+
+<section class="trending">
+    <div class="trending-header">
+        <div>
+            <h2>Anime</h2>
+        </div>
+<a href="{% url 'all_anime' %}" class="show-all">Show All</a>    </div>    
+    <div class="book-container">
+{% for book in anime %}
+    <div class="book-card" data-url="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url }}" alt="">
+            <h4>{{ book.title }}</h4>
+            <p class="author">{{ book.author }}</p>
+        <div class="price">
+                <span class="old">₹ {{ book.old_price }}</span>
+                <span class="off">₹ {{ book.discount }} Off</span>
+                <span class="new">₹ {{ book.price }}</span>
+            </div>
+      <button class="cart-btn">Add to Cart</button>
+    </div>
+{% endfor %}
+  </div>
+</section>
+
+
+
+<section class="trending">
+    <div class="trending-header">
+        <div>
+            <h2>Pack</h2>
+        </div>
+<a href="{% url 'all_pack' %}" class="show-all">Show All</a>    </div>    
+
+  <div class="book-container">
+{% for book in pack %}
+    <div class="book-card" data-url="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url }}" alt="">
+            <h4>{{ book.title }}</h4>
+            <p class="author">{{ book.author }}</p>
+        <div class="price">
+                <span class="old">₹ {{ book.old_price }}</span>
+                <span class="off">₹ {{ book.discount }} Off</span>
+                <span class="new">₹ {{ book.price }}</span>
+            </div>
+      <button class="cart-btn">Add to Cart</button>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="trending">
+    <div class="trending-header">
+        <div>
+            <h2>Kids</h2>
+        </div>
+<a href="{% url 'all_kids' %}" class="show-all">Show All</a>    </div>    
+
+  <div class="book-container">
+{% for book in kids %}
+    <div class="book-card" data-url="{% url 'product_detail' book.id %}">
+            <img src="{{ book.image.url }}" alt="">
+            <h4>{{ book.title }}</h4>
+            <p class="author">{{ book.author }}</p>
+        <div class="price">
+                <span class="old">₹ {{ book.old_price }}</span>
+                <span class="off">₹ {{ book.discount }} Off</span>
+                <span class="new">₹ {{ book.price }}</span>
+            </div>
+      <button class="cart-btn">Add to Cart</button>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+<div class="contact-container" id="contact">
+    <h2>Contact Us</h2>
+
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h2 class="logo">📚 Library</h2>
+            <p>Your one-stop shop for trending and best-selling books.</p>
+        </div>
+
+        <div class="footer-col">
+            <h3>Contact</h3>
+            <p>Email: support@Library.com</p>
+            <p>Phone: +91 98765 43210</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Library | All Rights Reserved</p>
+    </div>
+</footer>
+
+
+
+<script>
+    document.querySelectorAll(".book-card").forEach(card => {
+  card.addEventListener("click", function () {
+    window.location.href = this.dataset.url;
+  });
+});
+function setupPage() {
+  const buttons = document.querySelectorAll(".show-all");
+
+  buttons.forEach(btn => {
+    const container = btn.closest("section").querySelector(".book-container");
+
+
+    container.classList.add("limit");
+
+    btn.onclick = () => {
+      container.classList.remove("limit"); 
+    };
+  });
+}
+
+
+document.addEventListener("DOMContentLoaded", setupPage);
+
+
+window.addEventListener("pageshow", function () {
+  setupPage(); 
+});
+</script> 
+
+</body>
+</html>
+{% endblock %}
